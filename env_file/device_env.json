@@ -1,0 +1,7 @@
+{
+  "platformName": "Android",
+  "platformVersion": "14.0",
+  "deviceName": "Pixel_7_API_34",
+  "automationName": "UiAutomator2",
+  "enableAdbShell": true
+}

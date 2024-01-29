@@ -1,11 +1,13 @@
-import time
-
 import pytest
+from appium.webdriver.mobilecommand import MobileCommand
+from selenium.webdriver.common.actions.pointer_actions import PointerActions
 from selenium.webdriver.common.by import By
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver import ActionChains
+
+from appium.webdriver.common.touch_action import TouchAction
 
 
 class Test:
@@ -51,20 +53,21 @@ class Test:
 
         system_window_allow_button.click()
 
-
-
         # до open
         assert system_window_agree is not None
         assert system_window_allow is not None
 
     def test_introduction(self):
         device = self.driver
-        touch = ActionChains(device)
 
         game_window_intro = WebDriverWait(device, 90).until(EC.presence_of_element_located(
             (By.XPATH, "//android.view.View[@content-desc=\"Game view\"]")))
 
-        touch.move_by_offset(xoffset=1315, yoffset=528).click().perform()
+        # touch = ActionChains(device)
+        # touch.move_by_offset(1315, 528).click().perform()
+
+        touch = TouchAction(device)
+        touch.tap(x=1315, y=528).perform()
 
         game_window_main = WebDriverWait(device, 90).until(EC.presence_of_element_located(
             (By.XPATH, "//android.view.View[@content-desc=\"Game view\"]")))
